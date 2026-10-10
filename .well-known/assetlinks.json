@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.arcasmartfinance",
+      "sha256_cert_fingerprints":
+      ["B7:03:80:C0:B4:4F:55:0A:F4:C4:A8:68:40:6A:9C:82:62:DF:15:5C:E2:92:B8:80:35:0B:08:7F:49:49:4D:35",
+        "89:33:74:92:D8:8A:6F:40:B1:DE:AE:9D:75:42:4C:8E:E6:41:C1:6C:AA:A4:B5:87:15:B6:87:A3:AE:BD:9C:B1"]
+    }
+  }
+]
