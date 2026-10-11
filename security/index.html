@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security – ARCA</title>
+<meta name="description" content="How ARCA keeps your financial data safe: read-only Open Banking through TrueLayer, encryption, and what we can and cannot do.">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header class="site"><div class="inner">
+  <a class="brand" href="/">ARCA</a>
+  <nav><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/delete-account/">Delete account</a></nav>
+</div></header>
+
+<main>
+<h1>Security at ARCA</h1>
+<p class="meta">How we keep your financial data safe, in plain English.</p>
+
+<div class="summary">
+<ul>
+  <li><strong>Read-only.</strong> ARCA can see your balances and transactions. It can never move money, make payments or change anything in your bank account.</li>
+  <li><strong>We never see your bank login.</strong> You sign in on your own bank's app or website, not in ARCA.</li>
+  <li><strong>Regulated connection.</strong> Your bank connection is provided by TrueLayer, which is authorised and regulated by the Financial Conduct Authority.</li>
+  <li><strong>You're in control.</strong> Disconnect a bank or delete your account at any time.</li>
+</ul>
+</div>
+
+<h2 id="bank-connection">How connecting your bank works</h2>
+<ol class="steps">
+  <li>In ARCA, you choose your bank.</li>
+  <li>You're sent to <strong>TrueLayer</strong>, our regulated Open Banking provider, to review and agree to what's being shared.</li>
+  <li>You're then sent to <strong>your own bank</strong> to sign in and approve access, using your bank's normal security (Face ID, a passcode or a card reader).</li>
+  <li>Your bank gives ARCA a secure, read-only key. We never receive your bank username, password or PIN.</li>
+</ol>
+<p class="callout">ARCA will <strong>never</strong> ask you to type your online banking password into the app, by email or over the phone. If anyone claiming to be ARCA asks for it, don't share it and let us know.</p>
+
+<h2 id="can-and-cannot">What ARCA can and can't do</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th>ARCA can</th><th>ARCA can't</th></tr></thead>
+  <tbody>
+    <tr><td>See your account names, types and balances</td><td>Send, move or receive money</td></tr>
+    <tr><td>See your transaction history (amounts, dates, merchant names)</td><td>Make, approve, change or cancel payments</td></tr>
+    <tr><td>Refresh this data while your account stays connected</td><td>Change standing orders or direct debits</td></tr>
+    <tr><td></td><td>Change your bank details or settings</td></tr>
+  </tbody>
+</table></div>
+<p>This is enforced by the type of access we request from TrueLayer. We only ask for read-only data permissions, and payment permissions are never requested. Your bank also asks you to reconfirm access at least every 90 days. If you don't, the connection stops.</p>
+
+<h2 id="protecting-data">How we protect your data</h2>
+<h3>In transit</h3>
+<ul>
+  <li>Everything between the app, our servers, our database and our partners is sent over encrypted HTTPS connections.</li>
+</ul>
+<h3>At rest</h3>
+<ul>
+  <li>The keys that let us read your bank data are encrypted with <strong>AES-256-GCM</strong> before they're stored, so they're unreadable on their own even if the database were exposed.</li>
+  <li>Our database is hosted by Neon in <strong>London</strong> and is encrypted at rest.</li>
+  <li>Your ARCA password is never stored. We keep only a one-way <strong>bcrypt</strong> hash.</li>
+</ul>
+<h3>Your sign-in</h3>
+<ul>
+  <li>Sign-in sessions expire automatically, and the long-lived tokens that keep you signed in are stored only in hashed form.</li>
+  <li>Password-reset links expire after 15 minutes and work only once.</li>
+  <li>After several failed sign-in attempts, the account is temporarily locked to stop password guessing.</li>
+  <li>When an account is deleted, any existing sessions for it stop working immediately.</li>
+</ul>
+<h3>Behind the scenes</h3>
+<ul>
+  <li>Each account can only ever access its own data.</li>
+  <li>Secrets such as encryption keys and API keys are kept out of our source code and stored as protected environment variables.</li>
+  <li>Access to our production systems is limited to the ARCA team members who maintain the service, and only when needed to run or support it.</li>
+</ul>
+
+<h2 id="categorisation">Spending categories and AI</h2>
+<p>ARCA sorts your transactions into categories such as Food &amp; Dining or Transportation. We first match the merchant name against a list of well-known brands, then use an open-source AI model for anything else.</p>
+<ul>
+  <li>The model runs on <strong>our own servers</strong>. Your transactions are not sent to any third-party AI company.</li>
+  <li>Only the transaction description (such as the merchant name) is used. Your name, account details and amounts are not.</li>
+  <li>Your data is <strong>never used to train</strong> any model.</li>
+</ul>
+
+<h2 id="payments">Payments</h2>
+<p>Paid plans are processed by <strong>Stripe</strong>, a widely used payment provider. You enter your card details on Stripe's secure checkout, and ARCA never sees or stores your full card number.</p>
+
+<h2 id="partners">Who we work with</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th>Partner</th><th>Role</th><th>Location</th></tr></thead>
+  <tbody>
+    <tr><td>TrueLayer</td><td>Regulated Open Banking connection to your bank</td><td>UK / EU</td></tr>
+    <tr><td>Neon</td><td>Encrypted database hosting</td><td>London, UK</td></tr>
+    <tr><td>Railway</td><td>Server hosting</td><td>Netherlands</td></tr>
+    <tr><td>Stripe</td><td>Subscription payments</td><td>See Stripe's privacy policy</td></tr>
+  </tbody>
+</table></div>
+<p>We don't sell your data or share it with advertisers. See our <a href="/privacy/">Privacy Policy</a> for full details.</p>
+
+<h2 id="control">You're in control</h2>
+<ul>
+  <li><strong>Disconnect a bank</strong> at any time on the Accounts page in the app. We immediately stop retrieving new data from it. You can also revoke access directly with your bank.</li>
+  <li><strong>Delete your account</strong> in Settings → Edit Profile → Delete account. Your data is removed from our live database straight away, and we also ask TrueLayer to delete the data it holds for your connections. <a href="/delete-account/">More about deletion</a>.</li>
+</ul>
+
+<h2 id="regulation">Regulation</h2>
+<p>ARCA uses TrueLayer to connect to your bank. Account information services are provided by <strong>TrueLayer Limited</strong>, which is authorised and regulated by the UK Financial Conduct Authority under the Payment Services Regulations 2017 and the Electronic Money Regulations 2011 (Firm Reference Number: <strong>901096</strong>). You can check this on the <a href="https://register.fca.org.uk/" rel="noopener">FCA Register</a>.</p>
+<p>Nothing in ARCA is financial, tax, investment or legal advice.</p>
+
+<h2 id="report">Found a security issue?</h2>
+<p>If you think you've found a vulnerability in ARCA, please email <a href="mailto:smartfinanceapp12@gmail.com?subject=Security%20report">smartfinanceapp12@gmail.com</a> with the subject "Security report". Please give us a reasonable chance to fix it before sharing it publicly, and don't access or change other people's data while testing. We'll reply as quickly as we can and credit you if you'd like. Our <a href="/.well-known/security.txt">security.txt</a> has the same details.</p>
+</main>
+
+<footer class="site"><div class="inner">
+  <p class="disclosure">ARCA uses TrueLayer to connect to your bank. Account information services are provided by TrueLayer Limited, authorised and regulated by the Financial Conduct Authority (FRN 901096). ARCA can only read your data and can never move money.</p>
+  © 2026 ARCA · <a href="/security/">Security</a> · <a href="/privacy/">Privacy Policy</a> · <a href="/delete-account/">Delete account</a> · <a href="mailto:smartfinanceapp12@gmail.com">Contact</a>
+</div></footer>
+</body>
+</html>

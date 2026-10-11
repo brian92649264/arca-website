@@ -94,7 +94,7 @@ tr:last-child td { border-bottom: none; }
 }
 .hero { padding: 40px 0 8px; }
 .hero p { font-size: 1.1rem; color: var(--muted); max-width: 560px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 28px 0; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin: 28px 0; }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
 .card strong { display: block; margin-bottom: 4px; }
 .card span { color: var(--muted); font-size: 15px; }
@@ -102,3 +102,4 @@ tr:last-child td { border-bottom: none; }
 footer.site { border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
 footer.site .inner { padding-top: 20px; padding-bottom: 28px; }
 footer.site a { color: var(--muted); }
+footer.site .disclosure { margin: 0 0 10px; font-size: 13px; line-height: 1.55; max-width: 640px; }
