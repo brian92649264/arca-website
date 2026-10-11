@@ -88,15 +88,14 @@ svg text { font-family: inherit; }
 
 .dash { filter: drop-shadow(0 14px 22px rgba(20, 40, 34, 0.14)); }
 .card-bg { fill: var(--bg); stroke: var(--border); }
-.lbl { fill: var(--muted); font-size: 11px; }
-.big { fill: var(--text); font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
-.in { fill: var(--accent); font-weight: 600; }
-.out { fill: var(--text); font-weight: 600; }
-.pill { fill: var(--accent-soft); }
-.pill-t { fill: var(--accent); font-size: 9.5px; font-weight: 600; text-anchor: middle; }
-.axis { stroke: var(--border); }
-.tick { fill: var(--muted); font-size: 9px; text-anchor: middle; }
-.bars rect { fill: var(--accent-soft); transform-box: fill-box; transform-origin: bottom; animation: grow 1s cubic-bezier(.2,.8,.2,1) both; }
+.tile { fill: var(--surface); }
+.skel { fill: var(--border); }
+.k1 { fill: var(--accent); }
+.k2 { fill: var(--accent-2); }
+.k3 { fill: var(--amber); }
+.k4 { fill: var(--muted); opacity: 0.45; }
+
+.bars rect { fill: color-mix(in srgb, var(--accent) 35%, transparent); transform-box: fill-box; transform-origin: bottom; animation: grow 1s cubic-bezier(.2,.8,.2,1) both; }
 .bars rect.hi { fill: var(--accent); }
 .bars rect:nth-child(2) { animation-delay: .08s; }
 .bars rect:nth-child(3) { animation-delay: .16s; }
@@ -104,15 +103,27 @@ svg text { font-family: inherit; }
 .bars rect:nth-child(5) { animation-delay: .32s; }
 .bars rect:nth-child(6) { animation-delay: .40s; }
 @keyframes grow { from { transform: scaleY(0); } }
-.seg { fill: none; stroke-width: 14; }
+
+.seg { fill: none; stroke-width: 10; }
 .s1 { stroke: var(--accent); }
 .s2 { stroke: var(--accent-2); }
 .s3 { stroke: var(--amber); }
-.s4 { stroke: var(--border); }
+.s4 { stroke: var(--muted); opacity: 0.45; }
 .donut { animation: spin-in 1.2s cubic-bezier(.2,.8,.2,1) both; transform-box: fill-box; transform-origin: center; }
 @keyframes spin-in { from { opacity: 0; transform: rotate(-90deg) scale(.8); } }
-.donut-big { fill: var(--text); font-size: 14px; font-weight: 700; text-anchor: middle; }
-.donut-s { fill: var(--muted); font-size: 9px; text-anchor: middle; }
+
+.line { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw-line 1.6s .3s ease-out forwards; }
+.line.alt { stroke: var(--accent-2); stroke-width: 2; animation-delay: .5s; }
+.area { fill: color-mix(in srgb, var(--accent) 14%, transparent); animation: fade 1.2s .6s both; }
+.line-end { fill: var(--accent); animation: fade .4s 1.8s both; }
+@keyframes draw-line { to { stroke-dashoffset: 0; } }
+
+.tree rect { transform-box: fill-box; transform-origin: center; animation: pop .6s cubic-bezier(.2,.8,.2,1) both; }
+.tree rect:nth-child(2) { animation-delay: .12s; }
+.tree rect:nth-child(3) { animation-delay: .24s; }
+.tree rect:nth-child(4) { animation-delay: .36s; }
+@keyframes pop { from { opacity: 0; transform: scale(.7); } }
+@keyframes fade { from { opacity: 0; } }
 
 /* Sections */
 .band { padding: 72px 0; border-top: 1px solid var(--border); }
@@ -204,4 +215,5 @@ svg text { font-family: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .home *, .home *::before { animation: none !important; }
   .dots, .sec-visual .dot { display: none; }
+  .line { stroke-dashoffset: 0; }
 }

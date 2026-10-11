@@ -1,0 +1,50 @@
+/* Team page only (builds on home.css) */
+.team-hero { padding: 64px 0 40px; max-width: 760px; }
+.team-hero h1 { font-size: clamp(2rem, 4.6vw, 2.75rem); }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding-bottom: 72px;
+}
+.member {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.member:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.photo { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; background: var(--border); }
+.member-body { display: flex; flex-direction: column; flex: 1; padding: 18px 20px 20px; }
+.member h2 { font-size: 1.1rem; margin: 0 0 2px; }
+.role { margin: 0 0 12px; color: var(--accent); font-size: 14px; font-weight: 600; }
+.bio { margin: 0 0 12px; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.where { margin: auto 0 14px; font-size: 13px; color: var(--muted); }
+.links { display: flex; gap: 8px; }
+.links a {
+  display: grid; place-items: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--muted);
+}
+.links a:hover { color: var(--accent); border-color: var(--accent); }
+.links svg { width: 16px; height: 16px; fill: currentColor; }
+.links svg.stroke { fill: none; stroke: currentColor; stroke-width: 2; }
+
+.values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 28px; }
+.values p { margin: 0; color: var(--muted); font-size: 15px; }
+
+nav a[aria-current="page"] { color: var(--text); font-weight: 600; }
+
+@media (max-width: 960px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 760px) { .values { grid-template-columns: 1fr; gap: 20px; } }
+@media (max-width: 480px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .photo { aspect-ratio: 16 / 10; object-position: center 30%; }
+}

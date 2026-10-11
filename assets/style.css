@@ -45,6 +45,7 @@ header.site .inner {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  line-height: 1;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--text);
@@ -52,6 +53,7 @@ header.site .inner {
 }
 .brand img {
   display: block;
+  margin-top: 2px; /* optically centre the caps against the logo */
   border-radius: 6px;
 }
 nav a {
@@ -110,3 +112,9 @@ footer.site { border-top: 1px solid var(--border); color: var(--muted); font-siz
 footer.site .inner { padding-top: 20px; padding-bottom: 28px; }
 footer.site a { color: var(--muted); }
 footer.site .disclosure { margin: 0 0 10px; font-size: 13px; line-height: 1.55; max-width: 640px; }
+nav a { white-space: nowrap; }
+/* Narrow phones: keep the header on one line; Delete account stays in the footer */
+@media (max-width: 480px) {
+  nav a { margin-left: 14px; }
+  nav a[href="/delete-account/"] { display: none; }
+}
