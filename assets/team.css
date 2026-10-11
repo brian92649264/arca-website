@@ -1,14 +1,17 @@
 /* Team page only (builds on home.css) */
-.team-hero { padding: 64px 0 40px; max-width: 760px; }
+.team-hero { padding: 64px 0 40px; max-width: 760px; margin: 0 auto; text-align: center; }
+.team-hero .lede { margin-left: auto; margin-right: auto; }
 .team-hero h1 { font-size: clamp(2rem, 4.6vw, 2.75rem); }
 
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
   padding-bottom: 72px;
 }
 .member {
+  flex: 0 1 calc((100% - 60px) / 4);
   display: flex;
   flex-direction: column;
   background: var(--surface);
@@ -42,9 +45,9 @@
 
 nav a[aria-current="page"] { color: var(--text); font-weight: 600; }
 
-@media (max-width: 960px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 960px) { .member { flex-basis: calc((100% - 20px) / 2); } }
 @media (max-width: 760px) { .values { grid-template-columns: 1fr; gap: 20px; } }
 @media (max-width: 480px) {
-  .team-grid { grid-template-columns: 1fr; }
+  .member { flex-basis: 100%; }
   .photo { aspect-ratio: 16 / 10; object-position: center 30%; }
 }
