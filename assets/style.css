@@ -113,8 +113,7 @@ footer.site .inner { padding-top: 20px; padding-bottom: 28px; }
 footer.site a { color: var(--muted); }
 footer.site .disclosure { margin: 0 0 10px; font-size: 13px; line-height: 1.55; max-width: 640px; }
 nav a { white-space: nowrap; }
-/* Narrow phones: keep the header on one line; Delete account stays in the footer */
+/* Narrow phones: keep the header on one line */
 @media (max-width: 480px) {
   nav a { margin-left: 14px; }
-  nav a[href="/delete-account/"] { display: none; }
 }
