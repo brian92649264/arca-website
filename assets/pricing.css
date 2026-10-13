@@ -15,8 +15,9 @@
   display: flex;
   flex-direction: column;
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   border-radius: 18px;
+  box-shadow: var(--card-shadow);
   overflow: hidden;
 }
 .plan.featured { border-color: var(--accent); box-shadow: var(--shadow); }
@@ -58,7 +59,7 @@
   position: absolute; left: 0; top: 3px;
   width: 18px; height: 18px;
   border-radius: 50%;
-  background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-4.8' fill='none' stroke='%230f7a5c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat;
+  background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-4.8' fill='none' stroke='%232f55c4' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat;
 }
 .plan-features li.soon { color: var(--muted); }
 .plan-features li.soon::before { opacity: 0.55; }
