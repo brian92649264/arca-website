@@ -76,11 +76,11 @@
 </ul>
 
 <h2 id="categorisation">Spending categories and AI</h2>
-<p>ARCA sorts your transactions into categories such as Food &amp; Dining or Transportation. We first match the merchant name against a list of well-known brands, then use an open-source AI model for anything else.</p>
+<p>ARCA sorts your transactions into categories such as Food &amp; Dining or Transportation. Transfers between people, incoming money and well-known brands are handled by our own rules on our servers. Anything still unrecognised is categorised by Anthropic's Claude AI model.</p>
 <ul>
-  <li>The model runs on <strong>our own servers</strong>. Your transactions are not sent to any third-party AI company.</li>
-  <li>Only the transaction description (such as the merchant name) is used. Your name, account details and amounts are not.</li>
-  <li>Your data is <strong>never used to train</strong> any model.</li>
+  <li>Only the transaction description is sent to Anthropic. Your name, account details and amounts are never sent.</li>
+  <li>Anthropic processes it on our behalf, <strong>does not use it to train</strong> its models, and deletes it within 30 days (unless it must be kept longer for safety or legal reasons).</li>
+  <li>You can change any category yourself, and we keep your choice.</li>
 </ul>
 
 <div class="table-wrap"><table>
@@ -89,6 +89,7 @@
     <tr><td>TrueLayer</td><td>Regulated Open Banking connection to your bank</td><td>UK / EU</td></tr>
     <tr><td>Neon</td><td>Encrypted database hosting</td><td>London, UK</td></tr>
     <tr><td>Railway</td><td>Server hosting</td><td>Netherlands</td></tr>
+    <tr><td>Anthropic</td><td>AI categorisation of transaction descriptions</td><td>United States</td></tr>
   </tbody>
 </table></div>
 <p>We don't sell your data or share it with advertisers. See our <a href="/privacy/">Privacy Policy</a> for full details.</p>

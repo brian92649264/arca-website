@@ -18,7 +18,7 @@
 
 <main>
 <h1>Privacy Policy</h1>
-<p class="meta">Last updated: 11 October 2026</p>
+<p class="meta">Last updated: 13 October 2026</p>
 
 <nav class="toc" aria-label="Contents">
   <strong>Contents</strong>
@@ -53,6 +53,7 @@
 <ul>
   <li>ARCA is a <strong>read-only</strong> financial data aggregation tool. We can see your account data when you allow it; we can never move money or change your accounts.</li>
   <li>We use your data only to show you dashboards, categorise your transactions and give you spending insights.</li>
+  <li>Some transaction descriptions are categorised by an AI provider. We never send your name, account details or amounts.</li>
   <li>We do not sell your data or share it with advertisers.</li>
   <li>You can disconnect a bank or delete your account at any time.</li>
   <li>Nothing in the app is financial, tax, investment or legal advice.</li>
@@ -78,7 +79,7 @@
   <tbody>
     <tr><td>Create and run your account</td><td>Account details</td><td>Performance of our contract with you</td></tr>
     <tr><td>Aggregate your connected accounts and show dashboards, charts and summaries</td><td>Connected account data</td><td>Performance of our contract with you</td></tr>
-    <tr><td>Categorise transactions (e.g. income, groceries) and provide spending insights</td><td>Connected account data, categories</td><td>Performance of our contract with you</td></tr>
+    <tr><td>Categorise transactions (e.g. income, groceries) and provide spending insights</td><td>Connected account data, categories</td><td>Performance of our contract with you (see <a href="#categorisation">section 6</a>)</td></tr>
     <tr><td>Respond to support requests</td><td>Support messages, account details</td><td>Our legitimate interests in helping you</td></tr>
     <tr><td>Meet legal obligations</td><td>Any relevant data</td><td>Legal obligation</td></tr>
   </tbody>
@@ -99,9 +100,10 @@
 <p><strong>Reconfirming access.</strong> You will be asked to reconfirm that you want to keep an account connected at least every 90 days. If you do not, we stop retrieving new data for that account.</p>
 
 <h2 id="categorisation">6. Automatic transaction categorisation</h2>
-<p>We automatically sort your transactions into categories such as Food &amp; Dining, Transportation, Bills &amp; Housing and Entertainment &amp; Subscriptions, so your spending can be shown on your dashboard.</p>
-<p>We do this in two steps. First, we check the merchant name against a list of well-known brands. If there's no match, we use an open-source machine-learning model to suggest a category. Both steps run on our own servers, hosted by Railway. Only the transaction description, such as the merchant name, is used. Your name, account details and amounts are not.</p>
-<p>The model is pre-trained and used as-is. We do not use your transactions to train it or any other model, and your data is not shared with any third-party AI provider.</p>
+<p>We automatically sort your outgoing transactions into categories such as Food &amp; Dining, Transportation, Bills &amp; Housing and Entertainment &amp; Subscriptions.</p>
+<p>First, we use our own rules: payments between people are labelled Transfers, money coming in is labelled Income, and well-known merchants are matched against our own list. These steps run on our servers.</p>
+<p>If a transaction still isn't recognised, we send only its description text to our AI provider, Anthropic, whose Claude model suggests a category. We never send your name, account details, account numbers or amounts. Descriptions are written by your bank and merchant, so they may occasionally include other text, such as a payment reference.</p>
+<p>Anthropic processes this data on our behalf under its commercial terms. It does not use it to train its models, and it deletes it within 30 days (or longer only if needed for safety or legal reasons). If the AI service is unavailable, the transaction is labelled "Others".</p>
 <p>This is automated processing, but it does not make decisions that have legal or similarly significant effects on you. It only labels transactions for your own dashboard. You can change any category yourself, and we will keep your choice when transactions are re-categorised.</p>
 
 <h2 id="sharing">7. Who we share data with</h2>
@@ -112,13 +114,15 @@
     <tr><td>TrueLayer</td><td>Regulated Open Banking connection to your bank</td><td>UK / EU</td></tr>
     <tr><td>Neon</td><td>Database hosting</td><td>UK – London</td></tr>
     <tr><td>Railway</td><td>Backend server hosting</td><td>Netherlands</td></tr>
-    <tr><td>smartfinanceapp12@gmail.com</td><td>Account emails and support</td><td>UK</td></tr>
+    <tr><td>Anthropic</td><td>AI categorisation of transaction descriptions</td><td>United States</td></tr>
+    <tr><td>Google (Gmail)</td><td>Account emails and support</td><td>UK</td></tr>
   </tbody>
 </table></div>
 <p>Your data passes through our Open Banking provider only for the purpose of secure retrieval. We may also disclose data if required by law, or to a buyer or successor if ARCA is reorganised or sold, in which case this policy will continue to protect it.</p>
 
 <h2 id="transfers">8. International transfers</h2>
 <p>We aim to store your data in the UK or the European Economic Area. Where a provider processes data outside these areas, we make sure appropriate safeguards are in place, such as UK adequacy regulations or the UK International Data Transfer Agreement / Addendum.</p>
+<p>Transaction descriptions sent for AI categorisation are processed by Anthropic in the United States. These transfers are protected by Anthropic's data processing terms, which include the UK International Data Transfer Addendum to the EU Standard Contractual Clauses.</p>
 
 <h2 id="security">9. How we protect your data</h2>
 <p>A plain-English overview is also available on our <a href="/security/">Security page</a>.</p>
@@ -142,6 +146,7 @@
     <tr><td>Account details, transactions, budgets and connected account data</td><td>Until you delete your account. Deletion from our live database is immediate.</td></tr>
     <tr><td>Data from a disconnected bank account</td><td>We delete the stored bank data credentials straight away.</td></tr>
     <tr><td>Support messages</td><td>Until you delete your account. Copies sent to our support inbox are kept for up to 12 months after the conversation ends.</td></tr>
+    <tr><td>Transaction descriptions sent to Anthropic</td><td>Deleted by Anthropic within 30 days, unless retained longer for safety or legal reasons</td></tr>
     <tr><td>Database backups</td><td>Our database provider, Neon, keeps a short restore history of up to 7 days. After that, deleted data is permanently removed.</td></tr>
   </tbody>
 </table></div>
