@@ -15,7 +15,7 @@
     linear-gradient(180deg, #eaf2ff 0%, #f3f7ff 45%, #eef4ff 75%, #e6efff 100%);
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
 body {
   margin: 0;
   min-height: 100vh;
@@ -34,6 +34,7 @@ header.site .inner, main, footer.site .inner {
   padding: 0 20px;
 }
 header.site .inner {
+  max-width: 1040px; /* same width on every page so the header never shifts */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -122,9 +123,11 @@ nav a { white-space: nowrap; }
   .brand { font-size: 25px; }
   .brand img { width: 44px; height: 44px; }
 }
+@media (max-width: 560px) {
+  nav a { margin-left: 12px; }
+}
 /* Narrow phones: keep the header on one line */
 @media (max-width: 480px) {
-  nav a { margin-left: 14px; }
   header.site .inner { height: 68px; }
   .brand { font-size: 21px; gap: 9px; }
   .brand img { width: 36px; height: 36px; border-radius: 8px; }
