@@ -247,3 +247,35 @@ svg text { font-family: inherit; }
 @media (max-width: 640px) {
   .chart-list { grid-template-columns: 1fr; }
 }
+
+/* Ambition: prototype video */
+.video-slot {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; aspect-ratio: 16 / 9; margin-top: 20px;
+  background: var(--accent-soft); color: var(--muted); font-size: 14px; font-weight: 500;
+  border: 1.5px dashed var(--border); border-radius: 14px;
+}
+.video-slot.has-video { display: block; background: #000; border: 0; box-shadow: var(--shadow); }
+.video-slot.portrait { width: auto; max-width: 100%; height: 480px; aspect-ratio: 9 / 16; }
+.play { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--accent); }
+.play svg { width: 24px; height: 24px; fill: #fff; }
+.video-note { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+
+/* Ambition: waitlist */
+.support {
+  display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px 48px; align-items: center;
+  margin-top: 56px; padding: 32px;
+  background: var(--bg); border: 1.5px solid var(--accent); border-radius: 18px;
+  box-shadow: var(--card-shadow); scroll-margin-top: 16px;
+}
+.support h3 { font-size: 1.35rem; line-height: 1.3; margin: 0 0 12px; }
+.support .muted { margin: 0; font-size: 15px; }
+.support-action p { margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.btn {
+  display: block; padding: 13px 22px; border-radius: 999px; text-align: center; text-decoration: none;
+  background: var(--accent); color: #fff; font-weight: 600;
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
+@media (max-width: 860px) {
+  .support { grid-template-columns: 1fr; padding: 24px; }
+}

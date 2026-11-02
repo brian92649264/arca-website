@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ARCA – Smart Finance</title>
-<meta name="description" content="ARCA brings your bank accounts from different countries into one clear, read-only dashboard, with automatic categories, spending insights and budgets.">
+<meta name="description" content="Add your transactions in any currency, and ARCA turns them into one clear dashboard with automatic categories, spending insights and budgets. Free to use.">
 <link rel="icon" href="/favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
 <link rel="stylesheet" href="/assets/style.css?v=10">
-<link rel="stylesheet" href="/assets/home.css?v=8">
+<link rel="stylesheet" href="/assets/home.css?v=9">
 </head>
 <body class="home">
 <header class="site"><div class="inner">
@@ -24,18 +24,112 @@
   <div class="hero-copy">
     <p class="eyebrow">Smart finance for life across borders</p>
     <h1>All your Finances. One clear picture.</h1>
-    <p class="lede">ARCA brings your finance from different countries into one dashboard, so you can understand your money without switching between apps.</p>
+    <p class="lede">Add your transactions in any currency, and ARCA turns them into one clear dashboard, so you can understand your money at a glance.</p>
     <div class="cta">
       <span class="store-pill">Coming soon on Google Play</span>
-      <a class="text-link" href="#security">How we keep you safe →</a>
+      <a class="text-link" href="#waitlist">Join the waitlist →</a>
     </div>
     <ul class="facts">
-      <li>UK &amp; EU banks</li>
-      <li>Read-only access</li>
-      <li>We never see your bank password</li>
+      <li>Add any transaction in seconds</li>
+      <li>No bank login needed</li>
+      <li>Multi-currency</li>
+      <li>Free to use</li>
     </ul>
   </div>
 
+  <figure class="hero-visual" aria-label="Transactions you add flowing into one ARCA dashboard of charts">
+    <svg viewBox="0 0 420 400" role="img" aria-hidden="true">
+      <!-- connection paths -->
+      <g class="links">
+        <path id="l1" class="link" d="M45 52 C45 105, 210 95, 210 150"/>
+        <path id="l2" class="link" d="M145.5 52 C145.5 105, 210 95, 210 150"/>
+        <path class="link soon" d="M259.5 52 C259.5 105, 210 95, 210 150"/>
+        <path class="link soon" d="M374 52 C374 105, 210 95, 210 150"/>
+        <path class="flow" d="M45 52 C45 105, 210 95, 210 150"/>
+        <path class="flow" d="M145.5 52 C145.5 105, 210 95, 210 150"/>
+      </g>
+      <g class="dots">
+        <circle r="4" class="dot"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#l1"/></animateMotion></circle>
+        <circle r="4" class="dot alt"><animateMotion dur="2.4s" begin="-1.2s" repeatCount="indefinite"><mpath href="#l2"/></animateMotion></circle>
+      </g>
+
+      <!-- account chips -->
+      <g class="chip c1">
+        <rect x="0" y="4" width="90" height="48" rx="12"/>
+        <circle cx="20" cy="28" r="11" class="sym"/><text x="20" y="32" class="sym-t">£</text>
+        <text x="37" y="25" class="chip-t">Groceries</text><text x="37" y="40" class="chip-s">You add it</text>
+      </g>
+      <g class="chip c2">
+        <rect x="100.5" y="4" width="90" height="48" rx="12"/>
+        <circle cx="120.5" cy="28" r="11" class="sym alt"/><text x="120.5" y="32" class="sym-t">€</text>
+        <text x="137.5" y="25" class="chip-t">Rent</text><text x="137.5" y="40" class="chip-s">You add it</text>
+      </g>
+      <g class="chip soon">
+        <rect x="201.5" y="4" width="116" height="48" rx="12"/>
+        <circle cx="221.5" cy="28" r="11" class="sym muted"/>
+        <g class="trend"><circle cx="221.5" cy="28" r="6"/><path d="M215.5 28h12M221.5 22c-3 3.5-3 8.5 0 12M221.5 22c3 3.5 3 8.5 0 12"/></g>
+        <text x="238.5" y="25" class="chip-t">Bank sync</text><text x="238.5" y="40" class="chip-s">Our ambition</text>
+      </g>
+      <g class="chip soon">
+        <rect x="328" y="4" width="92" height="48" rx="12"/>
+        <circle cx="348" cy="28" r="11" class="sym muted"/>
+        <path d="M342 32 l4 -5 l3 3 l5 -6" class="trend"/>
+        <text x="365" y="25" class="chip-t">Investing</text><text x="365" y="40" class="chip-s">Ambition</text>
+      </g>
+
+      <!-- dashboard: a grid of charts, no numbers -->
+      <g class="dash">
+        <rect x="40" y="150" width="340" height="240" rx="18" class="card-bg"/>
+
+        <!-- bar chart -->
+        <rect x="56" y="166" width="148" height="100" rx="10" class="tile"/>
+        <rect x="68" y="178" width="44" height="5" rx="2.5" class="skel"/>
+        <g class="bars">
+          <rect x="70"  y="222" width="12" height="32" rx="3"/>
+          <rect x="90"  y="207" width="12" height="47" rx="3"/>
+          <rect x="110" y="228" width="12" height="26" rx="3"/>
+          <rect x="130" y="200" width="12" height="54" rx="3"/>
+          <rect x="150" y="214" width="12" height="40" rx="3"/>
+          <rect x="170" y="194" width="12" height="60" rx="3" class="hi"/>
+        </g>
+
+        <!-- donut + legend -->
+        <rect x="216" y="166" width="148" height="100" rx="10" class="tile"/>
+        <rect x="228" y="178" width="36" height="5" rx="2.5" class="skel"/>
+        <g class="donut"><g transform="rotate(-90 256 228)">
+          <circle cx="256" cy="228" r="24" pathLength="100" class="seg s1" stroke-dasharray="38 62" stroke-dashoffset="0"/>
+          <circle cx="256" cy="228" r="24" pathLength="100" class="seg s2" stroke-dasharray="24 76" stroke-dashoffset="-38"/>
+          <circle cx="256" cy="228" r="24" pathLength="100" class="seg s3" stroke-dasharray="18 82" stroke-dashoffset="-62"/>
+          <circle cx="256" cy="228" r="24" pathLength="100" class="seg s4" stroke-dasharray="20 80" stroke-dashoffset="-80"/>
+        </g></g>
+        <circle cx="300" cy="210" r="3.5" class="k1"/><rect x="309" y="207.5" width="40" height="5" rx="2.5" class="skel"/>
+        <circle cx="300" cy="222" r="3.5" class="k2"/><rect x="309" y="219.5" width="30" height="5" rx="2.5" class="skel"/>
+        <circle cx="300" cy="234" r="3.5" class="k3"/><rect x="309" y="231.5" width="34" height="5" rx="2.5" class="skel"/>
+        <circle cx="300" cy="246" r="3.5" class="k4"/><rect x="309" y="243.5" width="24" height="5" rx="2.5" class="skel"/>
+
+        <!-- line chart -->
+        <rect x="56" y="276" width="148" height="100" rx="10" class="tile"/>
+        <rect x="68" y="288" width="40" height="5" rx="2.5" class="skel"/>
+        <path d="M70 352 L94 340 L118 345 L142 322 L166 328 L190 306 V362 H70 Z" class="area"/>
+        <path d="M70 352 L94 340 L118 345 L142 322 L166 328 L190 306" pathLength="1" class="line"/>
+        <path d="M70 356 L94 352 L118 348 L142 350 L166 342 L190 340" pathLength="1" class="line alt"/>
+        <circle cx="190" cy="306" r="3.5" class="line-end"/>
+
+        <!-- treemap -->
+        <rect x="216" y="276" width="148" height="100" rx="10" class="tile"/>
+        <rect x="228" y="288" width="48" height="5" rx="2.5" class="skel"/>
+        <g class="tree">
+          <rect x="228" y="302" width="64" height="62" rx="5" class="k1"/>
+          <rect x="295" y="302" width="57" height="34" rx="5" class="k2"/>
+          <rect x="295" y="339" width="30" height="25" rx="5" class="k3"/>
+          <rect x="328" y="339" width="24" height="25" rx="5" class="k4"/>
+        </g>
+      </g>
+    </svg>
+  </figure>
+  <!-- Original bank-connection animation, hidden while ARCA launches with manual entry.
+       A <template> is never rendered. To restore it, move this figure back in place of the one above. -->
+  <template id="hero-bank-visual">
   <figure class="hero-visual" aria-label="Bank accounts from different countries flowing into one ARCA dashboard of charts">
     <svg viewBox="0 0 420 400" role="img" aria-hidden="true">
       <!-- connection paths -->
@@ -126,6 +220,7 @@
       </g>
     </svg>
   </figure>
+  </template>
 </section>
 
 <!-- Why -->
@@ -137,9 +232,9 @@
     </div>
     <div class="prose">
       <p>We built ARCA out of our own experience. With bank accounts back home and more where we lived, there was never one place to see the full picture. Every check meant opening several apps and adding everything up by hand.</p>
-      <p>ARCA is the app we wished we had: connect your accounts once, then see everything together.</p>
+      <p>ARCA is the app we wished we had: one place to add what you spend, wherever you spend it, and see everything together.</p>
       <h3>Why "ARCA"?</h3>
-      <p><em>Arca</em> is Latin for a strongbox, the chest Romans used to keep their most valuable things safe. That's the idea behind ARCA: one secure place where all your accounts come together, so you can see your whole financial picture at a glance.</p>
+      <p><em>Arca</em> is Latin for a strongbox, the chest Romans used to keep their most valuable things safe. That's the idea behind ARCA: one secure place where your finances come together, so you can see your whole financial picture at a glance.</p>
     </div>
   </div>
 </section>
@@ -150,14 +245,14 @@
   <h2>Understand your money at a glance.</h2>
   <div class="features">
     <div class="feature">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 10h18M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18M12 3l9 5H3z"/></svg></span>
-      <h3>Connect your banks</h3>
-      <p>Link accounts from the UK and across the EU, even in different countries. Transactions import automatically, so there's nothing to type in.</p>
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 8v8M8 12h8"/><rect x="3" y="3" width="18" height="18" rx="4"/></svg></span>
+      <h3>Add transactions in seconds</h3>
+      <p>A simple form lets you add any transaction in any currency, then edit or delete it whenever you like. No bank login needed.</p>
     </div>
     <div class="feature">
       <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 14h3M8 17h6"/></svg></span>
       <h3>The full picture</h3>
-      <p>Balance, income and expenses across every account. Switch between all accounts or a single bank.</p>
+      <p>Your balance, income and expenses, all together in one clear view.</p>
     </div>
     <div class="feature">
       <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="18" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></svg></span>
@@ -167,7 +262,7 @@
     <div class="feature">
       <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
       <h3>Insights through charts</h3>
-      <p>Spending by category, monthly trends, top merchants, spending by day and time, and how your accounts compare.</p>
+      <p>Spending by category, monthly trends, top merchants, and spending by day and time.</p>
     </div>
     <div class="feature">
       <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="11" width="8" height="10" rx="2"/><rect x="3" y="14" width="8" height="7" rx="2"/></svg></span>
@@ -185,7 +280,7 @@
     <p class="eyebrow">Who ARCA is for</p>
     <ul>
       <li>Anyone living internationally</li>
-      <li>People with several bank accounts who want one simple overview</li>
+      <li>People with several accounts who want one simple overview</li>
       <li>Anyone who wants to understand their spending without a spreadsheet</li>
     </ul>
   </div>
@@ -197,38 +292,65 @@
     <div>
       <p class="eyebrow">Our ambition</p>
       <h2>One place for your whole financial life.</h2>
-      <p class="muted">We're adding support step by step, and your feedback helps us decide what comes first.</p>
+      <p class="muted">We've already built a working prototype that connects real bank accounts. This video shows where ARCA is heading. We're launching with manual entry first so you can use it sooner, then adding more step by step.</p>
+
+      <!-- MVP VIDEO: put the file at /assets/arca-mvp.mp4 and replace the whole .video-slot div with:
+           <video class="video-slot has-video" controls playsinline preload="metadata" src="/assets/arca-mvp.mp4"></video>
+           For a vertical phone recording, also add the class "portrait". -->
+      <div class="video-slot" role="img" aria-label="Video of the ARCA prototype, coming soon">
+        <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></span>
+        <span>Prototype video coming soon</span>
+      </div>
+      <p class="video-note">Working prototype. Bank connections are not available in the public app.</p>
     </div>
     <ol class="roadmap">
       <li class="done">
-        <span class="status">Available now</span>
-        <strong>UK &amp; EU bank accounts</strong>
-        <span>Accounts from different countries, side by side.</span>
+        <span class="status">At launch</span>
+        <strong>Manual entry with the full dashboard</strong>
+        <span>Add any transaction and see it in every chart, category and budget.</span>
       </li>
       <li>
-        <span class="status">In progress</span>
-        <strong>Banks in North America and Asia</strong>
-        <span>Bringing more regions into the same dashboard.</span>
+        <span class="status">Short term</span>
+        <strong>Less typing, more insight</strong>
+        <span>Receipt scanning, budget alerts, monthly email reports and upcoming bills.</span>
       </li>
       <li>
-        <span class="status">In progress</span>
-        <strong>Investment accounts</strong>
-        <span>Your investments alongside your everyday banking.</span>
+        <span class="status">Long term</span>
+        <strong>Automatic UK &amp; EU bank connections</strong>
+        <span>What you see in the video: connect your accounts once through a regulated provider, then see everything together.</span>
+      </li>
+      <li>
+        <span class="status">Long term</span>
+        <strong>More regions and investments</strong>
+        <span>Banks in North America and Asia, and investment accounts alongside your everyday banking.</span>
       </li>
     </ol>
+  </div>
+
+  <div class="support" id="waitlist">
+    <div>
+      <p class="eyebrow">Support ARCA</p>
+      <h3>We're a small team with a big ambition.</h3>
+      <p class="muted">ARCA is built by two founders in London, and every bit of support helps us go further. Joining the waitlist tells us what to build next, and shows the partners and investors we speak to that people want this.</p>
+    </div>
+    <div class="support-action">
+      <!-- WAITLIST LINK: replace this href with your sign-up form URL once it's created. -->
+      <a class="btn" href="mailto:smartfinanceapp12@gmail.com?subject=Join%20the%20ARCA%20waitlist">Join the waitlist</a>
+      <p>We'll only email you about ARCA's launch and progress, and you can leave at any time. See our <a href="/privacy/#waitlist">Privacy Policy</a>.</p>
+    </div>
   </div>
 
   <div class="diff">
     <div class="diff-copy">
       <p class="eyebrow">What makes ARCA different</p>
-      <h3>Not just linked accounts. Your money, made clear.</h3>
-      <p class="muted">Many apps can link more than one account. ARCA goes further, turning your transactions into a wide range of charts, each one kept simple enough to understand in seconds.</p>
+      <h3>Not just a list of numbers. Your money, made clear.</h3>
+      <p class="muted">Many finance apps stop at a list and a total. ARCA goes further, turning your transactions into a wide range of charts, each one kept simple enough to understand in seconds.</p>
     </div>
     <ul class="chart-list">
       <li>
-        <svg viewBox="0 0 24 24"><path d="M4 20V9M8 20v-6M14 20V5M18 20v-9"/><path d="M2 20h20"/></svg>
-        <strong>Compare your bank accounts</strong>
-        <span>See how each account is used, side by side, even across countries.</span>
+        <svg viewBox="0 0 24 24"><path d="M3 16l6-6 4 4 8-8"/><path d="M2 20h20"/></svg>
+        <strong>Your monthly trend</strong>
+        <span>Money in and money out, month by month, so changes are easy to spot.</span>
       </li>
       <li>
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
@@ -238,7 +360,7 @@
       <li>
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="10" height="16" rx="1.5"/><rect x="15" y="4" width="6" height="9" rx="1.5"/><rect x="15" y="15" width="6" height="5" rx="1.5"/></svg>
         <strong>Where your money goes</strong>
-        <span>A clear breakdown of the merchants you spend the most with.</span>
+        <span>A clear breakdown of where you spend the most.</span>
       </li>
     </ul>
     <p class="and-more">…and more charts, with new ones on the way.</p>
@@ -248,51 +370,13 @@
 <!-- Security -->
 <section class="band" id="security">
   <p class="eyebrow">Security is always our priority</p>
-  <h2>We can only see your transactions and never move your money.</h2>
-
-  <figure class="sec-visual" aria-label="You log in at your bank, TrueLayer passes read-only data to ARCA, and ARCA cannot move money">
-    <svg viewBox="0 0 420 230" aria-hidden="true">
-      <path id="s1" d="M102 80 H168" class="link"/>
-      <path id="s2" d="M252 80 H318" class="link"/>
-      <circle r="4" class="dot"><animateMotion dur="1.6s" repeatCount="indefinite"><mpath href="#s1"/></animateMotion></circle>
-      <circle r="4" class="dot"><animateMotion dur="1.6s" begin="-0.8s" repeatCount="indefinite"><mpath href="#s2"/></animateMotion></circle>
-
-      <g class="lock" transform="translate(135 52)">
-        <path d="M-5 -2 v-4 a5 5 0 0 1 10 0 v4" class="shackle"/>
-        <rect x="-8" y="-2" width="16" height="12" rx="3" class="lock-body"/>
-      </g>
-
-      <g class="node">
-        <rect x="18" y="38" width="84" height="84" rx="20"/>
-        <path d="M40 72h40M44 72v26M53 72v26M67 72v26M76 72v26M38 102h44M60 58l22 11H38z" class="ico-s"/>
-      </g>
-      <g class="node mid">
-        <rect x="168" y="38" width="84" height="84" rx="20"/>
-        <path d="M210 56l20 8v14c0 13-9 21-20 25-11-4-20-12-20-25V64z" class="ico-s"/>
-        <path d="M201 80l6 6 12-12" class="ico-s tick-mark"/>
-      </g>
-      <g class="node">
-        <rect x="318" y="38" width="84" height="84" rx="20"/>
-        <image href="/assets/logo.png" x="338" y="58" width="44" height="44"/>
-      </g>
-
-      <text x="60" y="146" class="n-t">Your bank</text><text x="60" y="163" class="n-s">You log in here</text>
-      <text x="210" y="146" class="n-t">TrueLayer</text><text x="210" y="163" class="n-s">FCA-regulated</text>
-      <text x="360" y="146" class="n-t">ARCA</text><text x="360" y="163" class="n-s">Read-only view</text>
-
-    </svg>
-  </figure>
+  <h2>No bank login, and no access to your accounts.</h2>
 
   <div class="sec-points">
-    <div><strong>Your password stays with your bank</strong><span>You log in on your own bank's screen, so ARCA never sees or stores your banking password.</span></div>
-    <div><strong>Read-only access</strong><span>ARCA can view your transactions, but it can never move your money.</span></div>
+    <div><strong>Your bank stays separate</strong><span>ARCA doesn't connect to your bank, so there's no banking password to share and no way for us to move your money.</span></div>
+    <div><strong>You choose what goes in</strong><span>ARCA only holds the transactions you decide to add.</span></div>
     <div><strong>We don't sell your data</strong><span>Your financial data is used only to show you your own dashboard and insights.</span></div>
-    <div><strong>Disconnect any time</strong><span>Remove an account whenever you like from the Accounts screen.</span></div>
-  </div>
-
-  <div class="reg">
-    <span class="reg-ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9.5C7.5 20.5 4 17 4 12V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></svg></span>
-    <p><strong>Regulated bank connection.</strong> ARCA connects to your bank through open banking with TrueLayer. Account information services are provided by TrueLayer Limited, authorised and regulated by the Financial Conduct Authority (FRN 901096). You can check this on the <a href="https://register.fca.org.uk/" rel="noopener">FCA Register</a>.</p>
+    <div><strong>Delete any time</strong><span>Remove your account and your data whenever you like, right from the app.</span></div>
   </div>
 
   <p><a class="text-link" href="/security/">Read more about how we keep your data safe →</a></p>
@@ -307,7 +391,7 @@
 </main>
 
 <footer class="site"><div class="inner">
-  <p class="disclosure">ARCA uses TrueLayer to connect to your bank. Account information services are provided by TrueLayer Limited, authorised and regulated by the Financial Conduct Authority (FRN 901096). ARCA can only read your data and can never move money.</p>
+  <p class="disclosure">ARCA does not connect to your bank or hold your banking details. It only shows what you enter, and it can never move money. Nothing in ARCA is financial advice.</p>
   © 2026 ARCA · <a href="/team/">Team</a> · <a href="/pricing/">Pricing</a> · <a href="/security/">Security</a> · <a href="/privacy/">Privacy Policy</a> · <a href="/delete-account/">Delete account</a> · <a href="mailto:smartfinanceapp12@gmail.com">Contact</a>
 </div></footer>
 </body>

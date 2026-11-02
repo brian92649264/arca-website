@@ -11,6 +11,7 @@
   margin: 0 auto;
   padding-bottom: 72px;
 }
+.plans.single { grid-template-columns: minmax(0, 460px); justify-content: center; }
 .plan {
   display: flex;
   flex-direction: column;

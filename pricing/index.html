@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pricing – ARCA</title>
-<meta name="description" content="ARCA is free to use with up to 2 linked bank accounts. A Basic plan for £5 a month, with up to 6 accounts and extra features, is coming soon.">
+<meta name="description" content="ARCA is completely free at launch, with no trial and no card needed.">
 <link rel="icon" href="/favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
 <link rel="stylesheet" href="/assets/style.css?v=10">
-<link rel="stylesheet" href="/assets/home.css?v=8">
-<link rel="stylesheet" href="/assets/pricing.css?v=3">
+<link rel="stylesheet" href="/assets/home.css?v=9">
+<link rel="stylesheet" href="/assets/pricing.css?v=4">
 </head>
 <body class="home">
 <header class="site"><div class="inner">
@@ -22,28 +22,31 @@
 
 <section class="pricing-hero">
   <p class="eyebrow">Pricing</p>
-  <h1>Start free. Upgrade when you need more.</h1>
-  <p class="lede">Everything you need to see your money in one place is free. The Basic plan adds more accounts and extra tools for people who want to go further.</p>
+  <h1>Completely free at launch.</h1>
+  <p class="lede">Everything in ARCA is free to use. No trial, no card and no hidden fees.</p>
 </section>
 
-<section class="plans" aria-label="Plans">
+<section class="plans single" aria-label="Plans">
 
   <article class="plan">
     <div class="plan-head">
       <h2>Free</h2>
-      <p class="plan-sub">Your full picture, at no cost</p>
-      <p class="price"><span class="amount">£0</span><span class="per">GBP / forever<br><small>no hidden fees</small></span></p>
+      <p class="plan-sub">Everything in the app, at no cost</p>
+      <p class="price"><span class="amount">£0</span><span class="per">GBP<br><small>no card needed</small></span></p>
       <span class="plan-cta available">Available at launch</span>
     </div>
     <ul class="plan-features">
-      <li><strong>Up to 2</strong> linked accounts</li>
+      <li>Add, edit and delete your transactions</li>
+      <li>Automatic categories you can change in a tap</li>
       <li>Full visualisation charts on the Dashboard</li>
+      <li>Monthly budgets for each category</li>
       <li>Multi-currency support &amp; 8 languages</li>
-      <li>Access to most UK &amp; EU banks</li>
-      <li class="soon">Scan up to 5 receipts <span class="tag">Coming soon</span></li>
     </ul>
   </article>
 
+  <!-- Basic plan, hidden while ARCA launches completely free.
+       A <template> is never rendered. To restore it, move this article out and remove "single" from .plans. -->
+  <template id="basic-plan">
   <article class="plan featured">
     <div class="plan-head">
       <h2>Basic <span class="badge">Coming soon</span></h2>
@@ -53,8 +56,7 @@
     </div>
     <p class="plan-lead">Everything in Free, including:</p>
     <ul class="plan-features">
-      <li><strong>Up to 6</strong> linked accounts</li>
-      <li>Access to most UK &amp; EU banks</li>
+      <li><strong>Up to 6</strong> accounts</li>
       <li>Budget alert notifications</li>
       <li>More themes to personalise your app</li>
       <li>Monthly report sent to your email</li>
@@ -63,27 +65,28 @@
       <li class="soon">Custom &amp; more categories <span class="tag">Coming soon</span></li>
     </ul>
   </article>
+  </template>
 
 </section>
 
 <section class="band pricing-faq" id="faq">
-  <h2>Questions about plans</h2>
+  <h2>Questions about pricing</h2>
   <div class="faq">
     <div>
-      <strong>How many bank accounts can I connect?</strong>
-      <span>The Free plan lets you connect up to 2 bank accounts. The Basic plan, coming soon, will allow up to 6.</span>
+      <strong>Is ARCA really free?</strong>
+      <span>Yes. There's no trial period and no card needed, and every feature in the app is free to use.</span>
     </div>
     <div>
-      <strong>Is the Free plan really free?</strong>
-      <span>Yes. There's no trial period and no card needed. You can use the Free plan for as long as you like.</span>
+      <strong>Why is it free?</strong>
+      <span>We're launching free so that as many people as possible can try ARCA and help decide what we build next.</span>
     </div>
     <div>
-      <strong>When will Basic be available?</strong>
-      <span>We're still building it. You'll see it in the app when it's ready, and nothing changes on the Free plan in the meantime.</span>
+      <strong>Will it always be free?</strong>
+      <span>If we ever add paid features, we'll tell you in the app first.</span>
     </div>
     <div>
-      <strong>Does paying change how my data is used?</strong>
-      <span>No. On every plan ARCA has read-only access and never sells your data. <a href="/security/">Read about security</a>.</span>
+      <strong>Does free mean you sell my data?</strong>
+      <span>No. ARCA only holds what you enter and never sells your data. <a href="/security/">Read about security</a>.</span>
     </div>
   </div>
 </section>
@@ -91,7 +94,7 @@
 </main>
 
 <footer class="site"><div class="inner">
-  <p class="disclosure">ARCA uses TrueLayer to connect to your bank. Account information services are provided by TrueLayer Limited, authorised and regulated by the Financial Conduct Authority (FRN 901096). ARCA can only read your data and can never move money.</p>
+  <p class="disclosure">ARCA does not connect to your bank or hold your banking details. It only shows what you enter, and it can never move money. Nothing in ARCA is financial advice.</p>
   © 2026 ARCA · <a href="/team/">Team</a> · <a href="/pricing/">Pricing</a> · <a href="/security/">Security</a> · <a href="/privacy/">Privacy Policy</a> · <a href="/delete-account/">Delete account</a> · <a href="mailto:smartfinanceapp12@gmail.com">Contact</a>
 </div></footer>
 </body>
