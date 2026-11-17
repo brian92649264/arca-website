@@ -284,12 +284,13 @@ svg text { font-family: inherit; }
 .support-action button.btn { width: 100%; border: 0; font: inherit; font-weight: 600; cursor: pointer; }
 .btn:disabled { opacity: 0.6; cursor: default; }
 .wl {
-  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px);
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px);
   padding: 0; border: 0; border-radius: 20px; background: var(--bg); color: var(--text);
   box-shadow: 0 30px 80px -20px rgba(20, 35, 90, 0.45);
+  overflow: hidden; /* only .wl-inner scrolls */
 }
 .wl::backdrop { background: rgba(20, 30, 60, 0.45); backdrop-filter: blur(2px); }
-.wl-inner { padding: 28px 28px 24px; overflow-y: auto; max-height: calc(100vh - 48px); }
+.wl-inner { padding: 28px 28px 24px; overflow-y: auto; max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px); }
 .wl-close {
   position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border: 0; border-radius: 50%;
   background: var(--surface); color: var(--muted); font-size: 20px; line-height: 1; cursor: pointer;

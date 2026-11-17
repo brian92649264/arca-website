@@ -27,19 +27,6 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
     });
   });
 
-  // Where the visitor came from (no questions needed)
-  const params = new URLSearchParams(location.search);
-  let referrer = '';
-  try {
-    const r = document.referrer && new URL(document.referrer);
-    if (r && r.host !== location.host) referrer = r.hostname;
-  } catch (e) { /* ignore */ }
-  const meta = {
-    source: params.get('utm_source') || referrer || 'direct',
-    campaign: params.get('utm_campaign') || '',
-    language: navigator.language || ''
-  };
-
   function show(el) {
     [step1, step2, done, already].forEach((x) => { x.hidden = x !== el; });
     $('wl-bar2').classList.toggle('on', el !== step1);
@@ -94,8 +81,7 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
     const id = newId();
     const firstName = $('wl-name').value.trim();
     try {
-      // Joining is the consent: the notice under the button explains it
-      const reply = await send({ action: 'join', id, email, firstName, consent: 'yes', ...meta });
+      const reply = await send({ action: 'join', id, email, firstName, language: navigator.language || '' });
       if (reply.status === 'exists') {
         $('wl-already-email').textContent = email;
         show(already);
