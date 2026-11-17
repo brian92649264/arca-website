@@ -307,8 +307,8 @@ svg text { font-family: inherit; }
   font: inherit; color: var(--text); background: #fff;
 }
 .wl input:focus, .wl textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-.wl-consent { display: flex; gap: 10px; align-items: flex-start; margin: 4px 0 18px; font-size: 13px; line-height: 1.5; color: var(--muted); }
-.wl-consent input { flex: none; width: 16px; height: 16px; margin-top: 3px; accent-color: var(--accent); }
+.wl-notice { margin: 12px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); text-align: center; }
+.wl input.wl-other { margin-top: 10px; padding: 9px 12px; font-size: 14px; }
 .wl-error { color: #b42318; font-size: 13px; margin: -6px 0 14px; }
 .wl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .wl-q { border: 0; padding: 0; margin: 0 0 20px; min-width: 0; }
@@ -325,7 +325,7 @@ svg text { font-family: inherit; }
 .wl-followup { margin: 12px 0 0; padding: 14px; background: var(--surface); border-radius: 12px; }
 .wl-followup legend { font-size: 14px; }
 .wl-actions { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 8px; }
-.wl-actions .btn, .wl-done .btn { width: 100%; border: 0; font: inherit; font-weight: 600; cursor: pointer; }
+.wl-actions .btn { width: 100%; border: 0; font: inherit; font-weight: 600; cursor: pointer; }
 .wl-skip { padding: 10px; border: 0; background: none; color: var(--muted); font: inherit; font-size: 14px; cursor: pointer; }
 .wl-skip:hover { color: var(--accent); }
 .wl-done { text-align: center; padding: 18px 0 6px; }

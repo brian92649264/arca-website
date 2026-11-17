@@ -8,7 +8,8 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
   if (!dlg || !openBtn) return;
 
   const $ = (id) => document.getElementById(id);
-  const step1 = $('wl-step1'), step2 = $('wl-step2'), done = $('wl-done');
+  const step1 = $('wl-step1'), step2 = $('wl-step2'), done = $('wl-done'), already = $('wl-already');
+  const otherInput = $('wl-other');
   let signupId = null;
 
   // Turn each plain <span> list into tappable chips
@@ -40,21 +41,22 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
   };
 
   function show(el) {
-    [step1, step2, done].forEach((x) => { x.hidden = x !== el; });
+    [step1, step2, done, already].forEach((x) => { x.hidden = x !== el; });
     $('wl-bar2').classList.toggle('on', el !== step1);
   }
 
   function showError(el, msg) { el.textContent = msg; el.hidden = !msg; }
 
-  function send(data) {
-    if (!WAITLIST_ENDPOINT) return Promise.reject(new Error('Waitlist endpoint not set'));
-    // no-cors: Apps Script doesn't send CORS headers; the request still arrives.
-    return fetch(WAITLIST_ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      keepalive: true,
-      body: new URLSearchParams(data)
-    });
+  // Sends to the Sheet and returns its reply, e.g. { status: 'ok' } or { status: 'exists' }
+  async function send(data) {
+    if (!WAITLIST_ENDPOINT) throw new Error('Waitlist endpoint not set');
+    const res = await fetch(WAITLIST_ENDPOINT, { method: 'POST', body: new URLSearchParams(data) });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    let reply;
+    try { reply = JSON.parse(text); } catch (e) { reply = { status: text.trim() === 'ok' ? 'ok' : 'error' }; }
+    if (reply.status !== 'ok' && reply.status !== 'exists') throw new Error(reply.status || 'error');
+    return reply;
   }
 
   function newId() {
@@ -62,12 +64,20 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
     return Date.now().toString(36) + Math.random().toString(36).slice(2);
   }
 
-  openBtn.addEventListener('click', () => {
-    show(signupId && !step2.hidden ? step2 : signupId ? done : step1);
-    dlg.showModal();
-  });
+  function startOver() {
+    step1.reset(); step2.reset();
+    otherInput.hidden = true;
+    showError($('wl-err1'), ''); showError($('wl-err2'), '');
+    signupId = null;
+    show(step1);
+    $('wl-email').focus();
+  }
+
+  // Reopening keeps whatever screen they were on (form, questions or thank-you)
+  openBtn.addEventListener('click', () => dlg.showModal());
   $('wl-close').addEventListener('click', () => dlg.close());
-  $('wl-finish').addEventListener('click', () => dlg.close());
+  dlg.querySelectorAll('[data-wl-close]').forEach((b) => b.addEventListener('click', () => dlg.close()));
+  dlg.querySelectorAll('[data-wl-again]').forEach((b) => b.addEventListener('click', startOver));
   // Click on the dark backdrop closes too
   dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
 
@@ -77,7 +87,6 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
     const email = $('wl-email').value.trim();
     if (step1.website.value) return; // honeypot: a bot filled the hidden field
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return showError(err, 'Please enter a valid email address.');
-    if (!$('wl-consent').checked) return showError(err, 'Please tick the box so we can email you about the launch.');
     showError(err, '');
 
     const btn = step1.querySelector('button[type=submit]');
@@ -85,7 +94,13 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
     const id = newId();
     const firstName = $('wl-name').value.trim();
     try {
-      await send({ action: 'join', id, email, firstName, consent: 'yes', ...meta });
+      // Joining is the consent: the notice under the button explains it
+      const reply = await send({ action: 'join', id, email, firstName, consent: 'yes', ...meta });
+      if (reply.status === 'exists') {
+        $('wl-already-email').textContent = email;
+        show(already);
+        return;
+      }
       signupId = id;
       $('wl-hi').textContent = firstName ? ', ' + firstName : '';
       show(step2);
@@ -96,15 +111,18 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
     }
   });
 
-  // "Which banks?" only for Yes / Maybe
+  // Show the "Which country?" box only when Other is ticked
   step2.addEventListener('change', (e) => {
-    if (e.target.name === 'connect') $('wl-banks').hidden = e.target.value.startsWith('No');
+    if (e.target.name === 'countries' && e.target.value === 'Other') {
+      otherInput.hidden = !e.target.checked;
+      if (e.target.checked) otherInput.focus(); else otherInput.value = '';
+    }
   });
 
   step2.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fd = new FormData(step2);
-    const connect = fd.get('connect') || '';
+    const countries = fd.getAll('countries');
     const btn = step2.querySelector('button[type=submit]');
     btn.disabled = true; btn.textContent = 'Sending…';
     try {
@@ -112,10 +130,10 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
         action: 'answers',
         id: signupId,
         age: fd.get('age') || '',
-        countries: fd.getAll('countries').join(', '),
+        countries: countries.join(', '),
+        otherCountry: countries.includes('Other') ? (fd.get('otherCountry') || '').trim() : '',
         apps: fd.get('apps') || '',
-        connect,
-        banks: connect.startsWith('No') ? '' : fd.getAll('banks').join(', '),
+        connect: fd.get('connect') || '',
         pay: fd.get('pay') || '',
         pain: (fd.get('pain') || '').trim()
       });
