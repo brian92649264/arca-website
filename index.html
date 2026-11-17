@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
 <link rel="stylesheet" href="/assets/style.css?v=10">
-<link rel="stylesheet" href="/assets/home.css?v=9">
+<link rel="stylesheet" href="/assets/home.css?v=10">
 </head>
 <body class="home">
 <header class="site"><div class="inner">
@@ -328,11 +328,105 @@
       <p class="muted">ARCA is built by two founders in London, and every bit of support helps us go further. Joining the waitlist tells us what to build next, and shows the partners and investors we speak to that people want this.</p>
     </div>
     <div class="support-action">
-      <!-- WAITLIST LINK: replace this href with your sign-up form URL once it's created. -->
-      <a class="btn" href="mailto:smartfinanceapp12@gmail.com?subject=Join%20the%20ARCA%20waitlist">Join the waitlist</a>
+      <button class="btn" type="button" id="wl-open">Join the waitlist</button>
       <p>We'll only email you about ARCA's launch and progress, and you can leave at any time. See our <a href="/privacy/#waitlist">Privacy Policy</a>.</p>
     </div>
   </div>
+
+  <!-- Waitlist sign-up. Submissions go to the Google Sheet set in /assets/waitlist.js -->
+  <dialog class="wl" id="wl" aria-labelledby="wl-title">
+    <div class="wl-inner">
+      <button class="wl-close" type="button" id="wl-close" aria-label="Close">×</button>
+      <div class="wl-steps" aria-hidden="true"><span class="on"></span><span id="wl-bar2"></span></div>
+
+      <!-- Step 1: saved as soon as it is submitted -->
+      <form id="wl-step1" novalidate>
+        <h2 id="wl-title">Join the ARCA waitlist</h2>
+        <p class="wl-sub">Be first to know when ARCA launches. It takes 10 seconds.</p>
+        <div class="wl-field">
+          <label for="wl-name">First name <span class="wl-opt">(optional)</span></label>
+          <input type="text" id="wl-name" name="firstName" autocomplete="given-name" maxlength="60">
+        </div>
+        <div class="wl-field">
+          <label for="wl-email">Email</label>
+          <input type="email" id="wl-email" name="email" autocomplete="email" required maxlength="200">
+        </div>
+        <div class="wl-hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <label class="wl-consent">
+          <input type="checkbox" id="wl-consent" name="consent" required>
+          <span>I'm happy for ARCA to email me about its launch and progress. I can unsubscribe at any time. See the <a href="/privacy/#waitlist">Privacy Policy</a>.</span>
+        </label>
+        <p class="wl-error" id="wl-err1" role="alert" hidden></p>
+        <button class="btn" type="submit">Join the waitlist</button>
+      </form>
+
+      <!-- Step 2: optional questions, added to the same row -->
+      <form id="wl-step2" hidden>
+        <h2>You're on the list<span id="wl-hi"></span>!</h2>
+        <p class="wl-sub">Help us build the right thing. These are optional and take about 20 seconds.</p>
+
+        <fieldset class="wl-q">
+          <legend>Your age</legend>
+          <div class="wl-chips" data-name="age" data-type="radio">
+            <span>Under 18</span><span>18–24</span><span>25–34</span><span>35–44</span><span>45+</span>
+          </div>
+        </fieldset>
+
+        <fieldset class="wl-q">
+          <legend>Which countries do you have bank accounts in?</legend>
+          <p class="wl-hint">Pick all that apply.</p>
+          <div class="wl-chips" data-name="countries" data-type="checkbox">
+            <span>UK</span><span>Ireland</span><span>France</span><span>Germany</span><span>Spain</span><span>Italy</span><span>Poland</span><span>India</span><span>China</span><span>Hong Kong</span><span>USA</span><span>Other</span>
+          </div>
+        </fieldset>
+
+        <fieldset class="wl-q">
+          <legend>How many banking or money apps do you check today?</legend>
+          <div class="wl-chips" data-name="apps" data-type="radio">
+            <span>1</span><span>2–3</span><span>4–5</span><span>6+</span>
+          </div>
+        </fieldset>
+
+        <fieldset class="wl-q">
+          <legend>Once it's available, would you connect your bank to ARCA?</legend>
+          <div class="wl-chips" data-name="connect" data-type="radio">
+            <span>Yes, definitely</span><span>Maybe</span><span>No, I prefer manual entry</span>
+          </div>
+          <fieldset class="wl-q wl-followup" id="wl-banks" hidden>
+            <legend>Which banks?</legend>
+            <div class="wl-chips" data-name="banks" data-type="checkbox">
+              <span>Monzo</span><span>Revolut</span><span>Wise</span><span>Starling</span><span>HSBC</span><span>Barclays</span><span>Lloyds</span><span>NatWest</span><span>Santander</span><span>Other</span>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <fieldset class="wl-q">
+          <legend>Would you pay for advanced features?</legend>
+          <div class="wl-chips" data-name="pay" data-type="radio">
+            <span>Free only</span><span>~£2/month</span><span>~£5/month</span><span>More, if it's great</span>
+          </div>
+        </fieldset>
+
+        <div class="wl-field">
+          <label for="wl-pain">What's the most annoying part of managing money across countries? <span class="wl-opt">(optional)</span></label>
+          <textarea id="wl-pain" name="pain" rows="2" maxlength="500"></textarea>
+        </div>
+
+        <p class="wl-error" id="wl-err2" role="alert" hidden></p>
+        <div class="wl-actions">
+          <button class="btn" type="submit">Send answers</button>
+          <button class="wl-skip" type="button" id="wl-skip">Skip for now</button>
+        </div>
+      </form>
+
+      <div class="wl-done" id="wl-done" hidden>
+        <div class="wl-tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h2>Thank you!</h2>
+        <p class="wl-sub">We'll email you when ARCA launches. Your answers help us decide what to build next.</p>
+        <button class="btn" type="button" id="wl-finish">Close</button>
+      </div>
+    </div>
+  </dialog>
 
   <div class="diff">
     <div class="diff-copy">
@@ -388,5 +482,6 @@
   <p class="disclosure">ARCA does not connect to your bank or hold your banking details. It only shows what you enter, and it can never move money. Nothing in ARCA is financial advice.</p>
   © 2026 ARCA · <a href="/team/">Team</a> · <a href="/pricing/">Pricing</a> · <a href="/security/">Security</a> · <a href="/privacy/">Privacy Policy</a> · <a href="/delete-account/">Delete account</a> · <a href="mailto:smartfinanceapp12@gmail.com">Contact</a>
 </div></footer>
+<script src="/assets/waitlist.js?v=1" defer></script>
 </body>
 </html>

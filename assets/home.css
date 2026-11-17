@@ -279,3 +279,57 @@ svg text { font-family: inherit; }
 @media (max-width: 860px) {
   .support { grid-template-columns: 1fr; padding: 24px; }
 }
+
+/* Waitlist sign-up (two-step dialog) */
+.support-action button.btn { width: 100%; border: 0; font: inherit; font-weight: 600; cursor: pointer; }
+.btn:disabled { opacity: 0.6; cursor: default; }
+.wl {
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px);
+  padding: 0; border: 0; border-radius: 20px; background: var(--bg); color: var(--text);
+  box-shadow: 0 30px 80px -20px rgba(20, 35, 90, 0.45);
+}
+.wl::backdrop { background: rgba(20, 30, 60, 0.45); backdrop-filter: blur(2px); }
+.wl-inner { padding: 28px 28px 24px; overflow-y: auto; max-height: calc(100vh - 48px); }
+.wl-close {
+  position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: var(--surface); color: var(--muted); font-size: 20px; line-height: 1; cursor: pointer;
+}
+.wl-steps { display: flex; gap: 6px; margin-bottom: 18px; }
+.wl-steps span { height: 4px; flex: 1; border-radius: 4px; background: var(--surface); }
+.wl-steps span.on { background: var(--accent); }
+.wl h2 { font-size: 1.35rem; line-height: 1.3; margin: 0 0 6px; padding: 0 32px 0 0; }
+.wl-sub { color: var(--muted); font-size: 15px; margin: 0 0 22px; }
+.wl-field { margin-bottom: 16px; }
+.wl-field label, .wl-q legend { display: block; padding: 0; margin-bottom: 6px; font-weight: 600; font-size: 15px; }
+.wl-opt { font-weight: 400; color: var(--muted); font-size: 13px; }
+.wl input[type=text], .wl input[type=email], .wl textarea {
+  width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 12px;
+  font: inherit; color: var(--text); background: #fff;
+}
+.wl input:focus, .wl textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.wl-consent { display: flex; gap: 10px; align-items: flex-start; margin: 4px 0 18px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.wl-consent input { flex: none; width: 16px; height: 16px; margin-top: 3px; accent-color: var(--accent); }
+.wl-error { color: #b42318; font-size: 13px; margin: -6px 0 14px; }
+.wl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.wl-q { border: 0; padding: 0; margin: 0 0 20px; min-width: 0; }
+.wl-hint { font-size: 12.5px; color: var(--muted); margin: -2px 0 8px; }
+.wl-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.wl-chip input { position: absolute; opacity: 0; pointer-events: none; }
+.wl-chip span {
+  display: inline-block; padding: 7px 14px; border: 1.5px solid var(--border); border-radius: 999px;
+  font-size: 14px; cursor: pointer; user-select: none; transition: background 0.12s, border-color 0.12s;
+}
+.wl-chip span:hover { border-color: var(--accent); }
+.wl-chip input:checked + span { background: var(--accent); border-color: var(--accent); color: #fff; }
+.wl-chip input:focus-visible + span { box-shadow: 0 0 0 3px var(--accent-soft); }
+.wl-followup { margin: 12px 0 0; padding: 14px; background: var(--surface); border-radius: 12px; }
+.wl-followup legend { font-size: 14px; }
+.wl-actions { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 8px; }
+.wl-actions .btn, .wl-done .btn { width: 100%; border: 0; font: inherit; font-weight: 600; cursor: pointer; }
+.wl-skip { padding: 10px; border: 0; background: none; color: var(--muted); font: inherit; font-size: 14px; cursor: pointer; }
+.wl-skip:hover { color: var(--accent); }
+.wl-done { text-align: center; padding: 18px 0 6px; }
+.wl-done h2 { padding: 0; }
+.wl-tick { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%; background: var(--accent-soft); }
+.wl-tick svg { width: 28px; height: 28px; fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.wl [hidden] { display: none !important; }
