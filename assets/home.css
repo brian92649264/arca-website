@@ -306,13 +306,18 @@ nav a.nav-cta:hover { color: #fff; background: color-mix(in srgb, var(--accent) 
 /* Waitlist sign-up (two-step dialog) */
 .btn:disabled { opacity: 0.6; cursor: default; }
 .wl {
-  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px);
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px); max-height: calc(100svh - 48px);
   padding: 0; border: 0; border-radius: 20px; background: var(--bg); color: var(--text);
   box-shadow: 0 30px 80px -20px rgba(20, 35, 90, 0.45);
   overflow: hidden; /* only .wl-inner scrolls */
 }
 .wl::backdrop { background: rgba(20, 30, 60, 0.45); backdrop-filter: blur(2px); }
-.wl-inner { padding: 28px 28px 24px; overflow-y: auto; max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px); }
+.wl-inner {
+  padding: 28px 28px 24px; overflow-y: auto; max-height: calc(100vh - 48px); max-height: calc(100svh - 48px);
+  overscroll-behavior: contain; /* scrolling past the end doesn't move the page behind */
+}
+/* Freeze the page while the popup is open, so the browser bar can't resize the screen under it */
+html:has(.wl[open]) { overflow: hidden; }
 .wl-close {
   position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border: 0; border-radius: 50%;
   background: var(--surface); color: var(--muted); font-size: 20px; line-height: 1; cursor: pointer;

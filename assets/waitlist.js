@@ -55,6 +55,7 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
   function show(el) {
     [step1, step2, done, already].forEach((x) => { x.hidden = x !== el; });
     $('wl-bar2').classList.toggle('on', el !== step1);
+    dlg.querySelector('.wl-inner').scrollTop = 0; // each screen starts at its top
   }
 
   function showError(el, msg) { el.textContent = msg; el.hidden = !msg; }
