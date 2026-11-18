@@ -12,6 +12,30 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
   const otherInput = $('wl-other');
   let signupId = null;
   let joining = null; // the email save running in the background, if any
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  // Emails that joined from this browser, so a repeat is caught with no wait at all
+  const KNOWN_KEY = 'arca-wl-joined';
+  function knownEmails() {
+    try { return JSON.parse(localStorage.getItem(KNOWN_KEY)) || []; } catch (e) { return []; }
+  }
+  function remember(email) {
+    try {
+      const list = knownEmails();
+      if (!list.includes(email)) localStorage.setItem(KNOWN_KEY, JSON.stringify(list.concat(email).slice(-20)));
+    } catch (e) { /* storage blocked: the server check still works */ }
+  }
+
+  // Ask the Sheet whether an email is already signed up, once per email, while they type
+  const checks = new Map();
+  function check(email) {
+    if (!checks.has(email)) {
+      const p = send({ action: 'check', email });
+      p.catch(() => checks.delete(email)); // allow a retry later
+      checks.set(email, p);
+    }
+    return checks.get(email);
+  }
 
   // Turn each plain <span> list into tappable chips
   dlg.querySelectorAll('.wl-chips').forEach((group) => {
@@ -82,13 +106,38 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
   // Click on the dark backdrop closes too
   dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
 
+  // Start the check as soon as the email looks complete, so it's usually done before they click Join
+  let typingTimer;
+  const emailInput = $('wl-email');
+  function precheck() {
+    const email = emailInput.value.trim().toLowerCase();
+    if (EMAIL_RE.test(email) && !knownEmails().includes(email)) check(email).catch(() => {});
+  }
+  emailInput.addEventListener('input', () => { clearTimeout(typingTimer); typingTimer = setTimeout(precheck, 500); });
+  emailInput.addEventListener('change', precheck);
+
+  function showAlready(email) {
+    $('wl-already-email').textContent = email;
+    show(already);
+  }
+
   step1.addEventListener('submit', async (e) => {
     e.preventDefault();
     const err = $('wl-err1');
     const email = $('wl-email').value.trim();
     if (step1.website.value) return; // honeypot: a bot filled the hidden field
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return showError(err, 'Please enter a valid email address.');
+    if (!EMAIL_RE.test(email)) return showError(err, 'Please enter a valid email address.');
     showError(err, '');
+
+    // Already signed up? Find out before showing any questions
+    const key = email.toLowerCase();
+    if (knownEmails().includes(key)) return showAlready(email);
+    const btn = step1.querySelector('button[type=submit]');
+    btn.disabled = true; btn.textContent = 'Joining…'; // only visible if the check is still running
+    let found = null;
+    try { found = await check(key); } catch (ex) { /* check failed: the join below still catches repeats */ }
+    btn.disabled = false; btn.textContent = 'Join the waitlist';
+    if (found && found.status === 'exists') { remember(key); return showAlready(email); }
 
     // Show the questions straight away and save the email in the background
     const id = newId();
@@ -101,11 +150,9 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
     const attempt = send({ action: 'join', id, email, firstName, language: navigator.language || '' });
     joining = attempt;
     attempt.then((reply) => {
+      remember(key);
       if (joining !== attempt) return; // they started over since
-      if (reply.status === 'exists') {
-        $('wl-already-email').textContent = email;
-        show(already);
-      }
+      if (reply.status === 'exists') showAlready(email); // rare: signed up elsewhere a moment ago
     }, () => {
       if (joining !== attempt) return;
       joining = null; signupId = null;
