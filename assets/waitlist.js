@@ -14,27 +14,19 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
   let joining = null; // the email save running in the background, if any
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-  // Emails that joined from this browser, so a repeat is caught with no wait at all
-  const KNOWN_KEY = 'arca-wl-joined';
-  function knownEmails() {
-    try { return JSON.parse(localStorage.getItem(KNOWN_KEY)) || []; } catch (e) { return []; }
-  }
-  function remember(email) {
-    try {
-      const list = knownEmails();
-      if (!list.includes(email)) localStorage.setItem(KNOWN_KEY, JSON.stringify(list.concat(email).slice(-20)));
-    } catch (e) { /* storage blocked: the server check still works */ }
-  }
+  // Clear the list an earlier version kept in the browser: the Sheet is the only record now
+  try { localStorage.removeItem('arca-wl-joined'); } catch (e) { /* storage blocked */ }
 
-  // Ask the Sheet whether an email is already signed up, once per email, while they type
+  // Ask the Sheet whether an email is already signed up, while they type.
+  // An answer is reused for a minute only, so rows deleted from the Sheet are noticed.
   const checks = new Map();
   function check(email) {
-    if (!checks.has(email)) {
-      const p = send({ action: 'check', email });
-      p.catch(() => checks.delete(email)); // allow a retry later
-      checks.set(email, p);
-    }
-    return checks.get(email);
+    const c = checks.get(email);
+    if (c && Date.now() - c.at < 60 * 1000) return c.p;
+    const p = send({ action: 'check', email });
+    p.catch(() => checks.delete(email)); // allow a retry later
+    checks.set(email, { p, at: Date.now() });
+    return p;
   }
 
   // Turn each plain <span> list into tappable chips
@@ -112,7 +104,7 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
   const emailInput = $('wl-email');
   function precheck() {
     const email = emailInput.value.trim().toLowerCase();
-    if (EMAIL_RE.test(email) && !knownEmails().includes(email)) check(email).catch(() => {});
+    if (EMAIL_RE.test(email)) check(email).catch(() => {});
   }
   emailInput.addEventListener('input', () => { clearTimeout(typingTimer); typingTimer = setTimeout(precheck, 500); });
   emailInput.addEventListener('change', precheck);
@@ -132,13 +124,12 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
 
     // Already signed up? Find out before showing any questions
     const key = email.toLowerCase();
-    if (knownEmails().includes(key)) return showAlready(email);
     const btn = step1.querySelector('button[type=submit]');
     btn.disabled = true; btn.textContent = 'Joining…'; // only visible if the check is still running
     let found = null;
     try { found = await check(key); } catch (ex) { /* check failed: the join below still catches repeats */ }
     btn.disabled = false; btn.textContent = 'Join the waitlist';
-    if (found && found.status === 'exists') { remember(key); return showAlready(email); }
+    if (found && found.status === 'exists') return showAlready(email);
 
     // Show the questions straight away and save the email in the background
     const id = newId();
@@ -150,11 +141,13 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
 
     const attempt = send({ action: 'join', id, email, firstName, language: navigator.language || '' });
     joining = attempt;
+    // From now on this email counts as signed up, so joining again with it skips the questions
+    checks.set(key, { p: Promise.resolve({ status: 'exists' }), at: Date.now() });
     attempt.then((reply) => {
-      remember(key);
       if (joining !== attempt) return; // they started over since
       if (reply.status === 'exists') showAlready(email); // rare: signed up elsewhere a moment ago
     }, () => {
+      checks.delete(key); // the save failed, so they're not on the list after all
       if (joining !== attempt) return;
       joining = null; signupId = null;
       showError(err, 'Sorry, something went wrong. Please try again, or email us at smartfinanceapp12@gmail.com.');
