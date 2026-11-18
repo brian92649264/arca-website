@@ -62,6 +62,9 @@ const WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw_aFZbMyhmGP
 
   // Reopening keeps whatever screen they were on (form, questions or thank-you)
   openBtn.addEventListener('click', () => dlg.showModal());
+  // Header and hero buttons open the same popup
+  document.querySelectorAll('[data-wl-open]').forEach((b) =>
+    b.addEventListener('click', (e) => { e.preventDefault(); dlg.showModal(); }));
   $('wl-close').addEventListener('click', () => dlg.close());
   dlg.querySelectorAll('[data-wl-close]').forEach((b) => b.addEventListener('click', () => dlg.close()));
   dlg.querySelectorAll('[data-wl-again]').forEach((b) => b.addEventListener('click', startOver));
