@@ -33,7 +33,9 @@ body.home main { padding-top: 0; }
   padding: 64px 0 72px;
 }
 .lede { font-size: 1.15rem; color: var(--muted); max-width: 30em; margin: 0 0 24px; }
-.cta { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; align-items: stretch; gap: 12px 16px; }
+.cta { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; align-items: stretch; gap: 12px; max-width: 100%; }
+.cta > * { white-space: nowrap; }
+@media (max-width: 1100px) { .cta > * { white-space: normal; } }
 @media (max-width: 520px) { .cta { display: grid; grid-auto-flow: row; width: 100%; } }
 .store-pill {
   display: inline-block;
@@ -275,9 +277,9 @@ nav a.nav-cta:hover { color: #fff; background: color-mix(in srgb, var(--accent) 
 @media (max-width: 640px) { nav a.nav-cta { display: none; } }
 
 /* Hero: waitlist button first, quieter store badge */
-.btn-inline { display: inline-block; width: auto; border: 1.5px solid transparent; padding: 14px 30px; font: inherit; font-weight: 600; font-size: 16.5px; line-height: 1.4; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(47, 85, 196, 0.6); }
+.btn-inline { display: inline-block; width: auto; border: 1.5px solid transparent; padding: 11px 20px; font: inherit; font-weight: 600; font-size: 15px; line-height: 1.4; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(47, 85, 196, 0.6); }
 /* Same box as .btn-inline so the two hero buttons match in size */
-.store-pill-quiet { display: inline-block; padding: 14px 30px; text-align: center; background: transparent; color: var(--muted); border: 1.5px solid var(--border); font-weight: 500; font-size: 16.5px; line-height: 1.4; }
+.store-pill-quiet { display: inline-block; padding: 11px 20px; text-align: center; background: transparent; color: var(--muted); border: 1.5px solid var(--border); font-weight: 500; font-size: 15px; line-height: 1.4; }
 
 /* Bank sync waitlist block (end of Our ambition) */
 .cta-block {
